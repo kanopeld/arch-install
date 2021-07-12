@@ -3,6 +3,7 @@
 USERNAME=kanopeld
 
 ln -sf /usr/share/zoneinfo/Europe/Minsk /etc/localtime
+timedatectl set-ntp true
 hwclock --systohc
 localectl set-locale LANG=en_US.UTF-8
 echo "LANG=en_US.UTF-8" >> /etc/locale.conf
@@ -36,8 +37,13 @@ systemctl enable libvirtd
 systemctl enable firewalld
 systemctl enable acpid
 
+print "\e[1;32mChange root password! \e[0m"
+passwd
+
 useradd -m ${USERNAME}
-echo ${USERNAME}:password | chpasswd
+print "\e[1;32mChange ${USERNAME} password! \e[0m"
+passwd ${USERNAME}
+
 usermod -aG libvirt ${USERNAME}
 usermod -aG wheel ${USERNAME}
 
