@@ -1,3 +1,5 @@
+#!/bin/bash
+
 timedatectl set-ntp true
 pacman -Syy --noconfirm reflector openssh
 echo root:toor | chpasswd

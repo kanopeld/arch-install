@@ -1,3 +1,5 @@
+#!/bin/bash
+
 BOOT_DRIVE=/dev/nvme0n1p6
 ROOT_DRIVE=/dev/nvme0n1p7
 LUKS_DRIVE_NAME=luks
