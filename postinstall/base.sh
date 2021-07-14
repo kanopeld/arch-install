@@ -19,7 +19,7 @@ pacman -S --noconfirm nvidia nvidia-utils nvidia-settings
 cd /tmp
 git clone https://aur.archlinux.org/paru
 cd ./paru
-mkpkg -si
+makepkg -si --noconfirm
 cd
 
 grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB_UEFI --recheck
@@ -37,20 +37,16 @@ systemctl enable libvirtd
 systemctl enable firewalld
 systemctl enable acpid
 
-print "\e[1;32mChange root password! \e[0m"
+printf "\e[1;32mChange root password! \e[0m"
 passwd
 
 useradd -m ${USERNAME}
-print "\e[1;32mChange ${USERNAME} password! \e[0m"
+printf "\e[1;32mChange ${USERNAME} password! \e[0m"
 passwd ${USERNAME}
 
 usermod -aG libvirt ${USERNAME}
 usermod -aG wheel ${USERNAME}
 
-sed -i 's/#%wheel/%wheel/' /etc/sudoers
+sed -i 's/# %wheel/%wheel/' /etc/sudoers
 
 printf "\e[1;32mDone! Type exit, umount -a and reboot.\e[0m"
-
-
-
-
